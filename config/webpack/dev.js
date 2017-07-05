@@ -26,10 +26,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], {
-      root:     path.resolve(process.env.PWD),
-      exclude:  ['**/*'],
-      verbose:  true,
-      dry:      false
+      root: path.resolve(process.env.PWD),
+      exclude: ['**/*'],
+      verbose: true,
+      dry: false
     }),
     new ExtractTextPlugin({
       filename: '[chunkHash].[name].css',
