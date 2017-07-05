@@ -10,7 +10,7 @@ module.exports = {
   entry: utils.merge(_javascripts, _styles),
   output: {
     path: path.resolve(process.env.PWD, 'dist'),
-    filename: '[chunkHash].[name].js'
+    filename: 'js/[chunkHash].[name].js'
   },
   module: {
     rules: [{
@@ -32,7 +32,7 @@ module.exports = {
       dry: false
     }),
     new ExtractTextPlugin({
-      filename: '[chunkHash].[name].css',
+      filename: 'styles/[chunkHash].[name].css',
       allChunks: true,
       disable: process.env.NODE_ENV === 'development'
     })
