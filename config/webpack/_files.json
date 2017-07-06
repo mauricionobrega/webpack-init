@@ -1,0 +1,7 @@
+[
+  {
+    "from": "src/svg/**/*",
+    "to": "dist/",
+    "toType": "dir"
+  }
+]
