@@ -1,7 +1,10 @@
 [
   {
+    "from": "src/index.html",
+    "to": "dist/"
+  },
+  {
     "from": "src/svg/**/*",
-    "to": "dist/",
-    "toType": "dir"
+    "to": "dist/"
   }
 ]

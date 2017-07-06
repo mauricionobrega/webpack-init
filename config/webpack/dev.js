@@ -20,7 +20,6 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        // use: 'css-loader'
         use: [
           { loader: 'css-loader', options: { minimize: true } }
         ]
@@ -42,7 +41,7 @@ module.exports = {
       allChunks: true,
       disable: process.env.NODE_ENV === 'development'
     }),
-    new CopyWebpackPlugin([], {
+    new CopyWebpackPlugin(_files, {
       ignore: [
         '*.txt', // Doesn't copy any files with a txt extension
         '**/*', // Doesn't copy any file, even if they start with a dot
