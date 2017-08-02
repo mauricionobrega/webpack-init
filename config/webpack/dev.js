@@ -9,10 +9,21 @@ const path = require('path'),
   PWD = process.env.PWD;
 
 module.exports = {
+  context: path.resolve(PWD),
   devtool: 'source-map',
   entry: utils.merge(_javascripts, _styles),
+  watch: true,
+  stats: {
+    colors: true,
+    reasons: true,
+    debug: true
+  },
+  devServer: {
+    outputPath: path.resolve(PWD, 'dist')
+  },
   output: {
     path: path.resolve(PWD, 'dist'),
+    publicPath: path.resolve(PWD, 'dist'),
     filename: 'js/[chunkHash].[name].js'
   },
   module: {
@@ -27,6 +38,9 @@ module.exports = {
     }, {
       test: /\.(sass|scss)$/,
       use: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+    }, {
+      test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+      use: ['file-loader?name=[chunkHash].[name].[ext]']
     }]
   },
   plugins: [
@@ -42,12 +56,8 @@ module.exports = {
       disable: process.env.NODE_ENV === 'development'
     }),
     new CopyWebpackPlugin(_files, {
-      ignore: [
-        '*.txt', // Doesn't copy any files with a txt extension
-        '**/*', // Doesn't copy any file, even if they start with a dot
-        { glob: '**/*', dot: false } // Doesn't copy any file, except if they start with a dot
-      ],
-      copyUnmodified: true // By default, we only copy modified files during a watch or webpack-dev-server build. Setting this to `true` copies all files.
+      ignore: ['*.txt', '*.DS_Store', '*.sass-cache', '*.swp'],
+      copyUnmodified: true
     })
   ]
 };

@@ -1,10 +1,12 @@
 [
   {
     "from": "src/index.html",
-    "to": "dist/"
+    "force": true
   },
   {
     "from": "src/svg/**/*",
-    "to": "dist/"
+    "to": "svg",
+    "flatten": true,
+    "force": true
   }
 ]
