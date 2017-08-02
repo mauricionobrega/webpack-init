@@ -18,4 +18,4 @@ module.exports = (() => {
     'merge': merge
   }
 
-}.call(this));
+})();
