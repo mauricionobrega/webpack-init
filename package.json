@@ -25,6 +25,7 @@
   "keywords": [],
   "author": "Mauricio Nobrega",
   "license": "ISC",
+  "browserslist": ["> 1%", "ie >= 10"],
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "clean-webpack-plugin": "^0.1.16",
