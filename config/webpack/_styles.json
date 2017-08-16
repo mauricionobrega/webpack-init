@@ -1,5 +1,5 @@
 {
   "home": [
-    "./src/sass/pages/home.scss"
+    "./src/sass/pages/home"
   ]
 }
