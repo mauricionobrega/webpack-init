@@ -13,6 +13,9 @@ module.exports = {
   devtool: 'source-map',
   entry: utils.merge(_javascripts, _styles),
   watch: true,
+  resolve: {
+    extensions: ['.scss', '.js']
+  },
   stats: {
     colors: true,
     reasons: true,
@@ -27,30 +30,28 @@ module.exports = {
     filename: 'js/[chunkHash].[name].js'
   },
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader', options: { importLoaders: 1, minimize: true } },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                require('autoprefixer')(),
-                require('stylelint')()
-              ]
+    rules: [
+      {
+        test: /\.(sass|scss)$/,
+        use: ExtractTextPlugin.extract({
+          // fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [require('autoprefixer')()]
+
+              }
             }
-          }
-        ]
-      }),
-    }, {
-      test: /\.(sass|scss)$/,
-      use: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
-    }, {
-      test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
-      use: ['file-loader?name=[chunkHash].[name].[ext]']
-    }]
+          ]
+        }),
+      },
+      {
+        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+        use: ['file-loader?name=[chunkHash].[name].[ext]']
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], {

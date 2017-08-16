@@ -1,5 +1,9 @@
-@import "../components/header";
+@import "../components/_header";
 
 body {
   background: gray;
+}
+
+:fullscreen a {
+  display: flex
 }

@@ -27,7 +27,6 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "stylelint": "^8.0.0",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
@@ -35,6 +34,8 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "stylelint": "^8.0.0",
     "webpack": "^3.4.1"
   },
   "dependencies": {}
