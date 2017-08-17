@@ -14,8 +14,8 @@ const path = require('path'),
 module.exports = {
   context: root,
   devtool: 'source-map',
-  entry: utils.merge(_javascripts, _styles), // utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}),
-  watch: true,
+  entry: utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}), // utils.merge(_javascripts, _styles),
+  watch: false,
   resolve: {
     extensions: ['.scss', '.js']
   },
@@ -34,6 +34,36 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {}
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [ {
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            removeComments: true,
+            removeCommentsFromCDATA: true,
+            removeCDATASectionsFromCDATA: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            removeAttributeQuotes: true,
+            useShortDoctype: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            removeScriptTypeAttributes: true,
+            removeStyleTypeAttributes: true
+          }
+        }],
+      },
       {
         test: /\.(sass|scss)$/,
         use: ExtractTextPlugin.extract({
@@ -54,10 +84,10 @@ module.exports = {
           ]
         }),
       },
-      {
-        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader?name=[chunkHash].[name].[ext]']
-      }
+      // {
+      //   test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+      //   use: ['file-loader?name=[name].[ext]']
+      // }
     ]
   },
   plugins: [
