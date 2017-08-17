@@ -11,12 +11,10 @@ const path = require('path'),
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
 
-// console.log('_staticTextFiles ------>> ', _staticTextFiles);
-
 module.exports = {
   context: root,
   devtool: 'source-map',
-  entry: utils.merge(_javascripts, _styles),
+  entry: utils.merge(_javascripts, _styles), // utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}),
   watch: true,
   resolve: {
     extensions: ['.scss', '.js']

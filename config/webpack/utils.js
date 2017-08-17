@@ -12,30 +12,12 @@ module.exports = (() => {
   };
 
   const spreadMerge = (...args) => {
-    let merged = {
-      files: []
-    }
-    for (const i in args) {
-      const target = args[i];
-      let a;
-      if (Array.isArray(target)) {
-        a = target.length;
-        while (a--) {
-          const file = target[a];
-          if (merged.files.indexOf(file) < 0) {
-            merged.files.push(file);
-          }
-        }
-      } else {
-        Object.assign(merged, args[i]);
-      }
-    }
-    return merged;
+    return Object.assign({}, ...args);
   }
 
   const listFiles = (path, filter) => {
     const all = dir.files(path, {sync:true});
-    let finalFiles;
+    let finalFiles, i;
 
     if (filter) {
       finalFiles = all.filter((file) => {
@@ -45,6 +27,10 @@ module.exports = (() => {
       finalFiles = all;
     }
 
+    i = finalFiles.length;
+    while (i--) {
+      finalFiles[i] = './' + finalFiles[i];
+    }
     return finalFiles;
   };
 
