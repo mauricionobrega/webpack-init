@@ -71,7 +71,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin(_files, {
       ignore: ['*.txt', '*.DS_Store', '*.sass-cache', '*.swp'],
-      copyUnmodified: true
+      copyUnmodified: true,
+      debug: true
     })
   ]
 };
