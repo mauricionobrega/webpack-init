@@ -1,15 +1,20 @@
 const path = require('path'),
+  utils = require('./utils'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   _files = require('./_files'),
   _javascripts = require('./_javascripts'),
   _styles = require('./_styles'),
-  utils = require('./utils'),
-  PWD = process.env.PWD;
+  _staticTextFiles = utils.listFiles('src', /\.(html|svg)$/),
+  PWD = process.env.PWD,
+  root = path.resolve(PWD),
+  dist = path.resolve(PWD, 'dist');
+
+// console.log('_staticTextFiles ------>> ', _staticTextFiles);
 
 module.exports = {
-  context: path.resolve(PWD),
+  context: root,
   devtool: 'source-map',
   entry: utils.merge(_javascripts, _styles),
   watch: true,
@@ -22,11 +27,11 @@ module.exports = {
     debug: true
   },
   devServer: {
-    outputPath: path.resolve(PWD, 'dist')
+    outputPath: dist
   },
   output: {
-    path: path.resolve(PWD, 'dist'),
-    publicPath: path.resolve(PWD, 'dist'),
+    path: dist,
+    publicPath: dist,
     filename: 'js/[chunkHash].[name].js'
   },
   module: {
@@ -59,7 +64,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(PWD),
+      root: root,
       exclude: ['**/*'],
       verbose: true,
       dry: false
