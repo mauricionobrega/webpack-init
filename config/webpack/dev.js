@@ -6,7 +6,7 @@ const path = require('path'),
   _files = require('./_files'),
   _javascripts = require('./_javascripts'),
   _styles = require('./_styles'),
-  _staticTextFiles = utils.listFiles('src', /\.(html|templates|svg)$/),
+  _staticTextFiles = utils.listFiles('src', /\.(html|template|svg)$/),
   PWD = process.env.PWD,
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
@@ -99,7 +99,7 @@ module.exports = {
         test: /\.html$/,
         // include: 'dist/',
         loaders: [
-         'file-loader?publicPath=/dist,name=[path][name].min.[ext]',
+         'file-loader?name=templates/[name].min.[ext]',
          {
             loader: 'html-minify-loader',
             options: {
