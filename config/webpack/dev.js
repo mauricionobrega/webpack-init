@@ -35,11 +35,43 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {}
+        test: /\.(gif|png|jpe?g|svg|webp)$/i,
+        loaders: [
+          'file-loader?name=./svg/[name].min.[ext]', {
+            loader: 'image-webpack-loader',
+            options: {
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              svgo:{
+                plugins: [
+                  {
+                    removeViewBox: true
+                  },
+                  {
+                    removeEmptyAttrs: true
+                  },
+                  {
+                    removeTitle: true
+                  }
+                ]
+              },
+              // Specifying webp here will create a WEBP version of your JPG/PNG images
+              webp: {
+                quality: 75
+              }
+            }
           }
         ]
       },
