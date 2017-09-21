@@ -1,0 +1,19 @@
+@import "../_variables",
+  "../components/_header";
+
+body {
+  background: gray;
+}
+
+a {
+  transition: transform 1s
+}
+
+:fullscreen a {
+  display: flex;
+  border-radius: 5px;
+}
+
+.product {
+  background: red;
+}

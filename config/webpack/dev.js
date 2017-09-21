@@ -6,7 +6,7 @@ const path = require('path'),
   _files = require('./_files'),
   _javascripts = require('./_javascripts'),
   _styles = require('./_styles'),
-  _staticTextFiles = utils.listFiles('src', /\.(html|svg)$/),
+  _staticTextFiles = utils.listFiles('src', /\.(svg)$/), // /\.(html|svg)$/
   PWD = process.env.PWD,
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
@@ -76,27 +76,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.html$/,
-        use: [ {
-          loader: 'html-loader',
-          options: {
-            minimize: true,
-            removeComments: true,
-            removeCommentsFromCDATA: true,
-            removeCDATASectionsFromCDATA: true,
-            collapseWhitespace: true,
-            conservativeCollapse: true,
-            removeAttributeQuotes: true,
-            useShortDoctype: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            removeScriptTypeAttributes: true,
-            removeStyleTypeAttributes: true
-          }
-        }],
-      },
-      {
         test: /\.(sass|scss)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -116,10 +95,6 @@ module.exports = {
           ]
         }),
       },
-      // {
-      //   test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
-      //   use: ['file-loader?name=[name].[ext]']
-      // }
     ]
   },
   plugins: [

@@ -1,10 +1,5 @@
 [
   {
-    "from": "src/index.html",
-    "force": true,
-    "flatten": true
-  },
-  {
     "from": "src/svg/**/*",
     "to": "svg",
     "force": true,

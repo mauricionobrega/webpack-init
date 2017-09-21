@@ -1,5 +1,6 @@
 {
   "home": [
-    "./src/sass/pages/home"
+    "./src/sass/pages/home",
+    "./src/sass/pages/product"
   ]
 }
