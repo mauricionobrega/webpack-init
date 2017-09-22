@@ -100,7 +100,6 @@ module.exports = {
       },
       {
         test: /\.(html|template)$/,
-        // include: 'dist/',
         loaders: [
          'file-loader?name=[path]/[name].min.[ext]',
          {
