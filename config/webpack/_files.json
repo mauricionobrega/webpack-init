@@ -1,8 +1,6 @@
-[
-  {
-    "from": "src/svg/**/*",
-    "to": "svg",
-    "force": true,
-    "flatten": true
-  }
-]
+[{
+  "from": "src/svg/**/*",
+  "to": "svg",
+  "force": true,
+  "flatten": true
+}]

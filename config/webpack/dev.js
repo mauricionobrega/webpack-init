@@ -4,12 +4,15 @@ const path = require('path'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   _files = require('./_files'),
+  _ignoreFiles = require('./_ignore-files'),
   _javascripts = require('./_javascripts'),
   _styles = require('./_styles'),
   _staticTextFiles = utils.listFiles('src', /\.(html|template|svg)$/),
   PWD = process.env.PWD,
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
+
+// console.log(utils.spreadMerge({javascripts: _javascripts}, {styles: _styles}, {static: _staticTextFiles}));
 
 module.exports = {
   context: root,
@@ -96,15 +99,19 @@ module.exports = {
         }),
       },
       {
-        test: /\.html$/,
+        test: /\.(html|template)$/,
         // include: 'dist/',
         loaders: [
-         'file-loader?name=templates/[name].min.[ext]',
+         'file-loader?name=[path]/[name].min.[ext]',
          {
             loader: 'html-minify-loader',
             options: {
              quotes: false,
-             dom: { lowerCaseTags: true }
+             dom: {
+               lowerCaseTags: true,
+               removeComments: true,
+               collapseWhitespace: true
+              }
             }
          }
         ]
@@ -124,7 +131,7 @@ module.exports = {
       disable: process.env.NODE_ENV === 'development'
     }),
     new CopyWebpackPlugin(_files, {
-      ignore: ['*.txt', '*.DS_Store', '*.sass-cache', '*.swp'],
+      ignore: _ignoreFiles,
       copyUnmodified: true,
       debug: true
     })

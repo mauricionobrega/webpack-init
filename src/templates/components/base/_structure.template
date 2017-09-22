@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html>
+  {>components/base/head /}
+  <body>
+    {>components/base/header /}
+    {>components/base/main /}
+    {>components/base/aside /}
+    {>components/base/footer /}
+  </body>
+</html>

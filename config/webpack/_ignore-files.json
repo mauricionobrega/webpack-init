@@ -1,0 +1,11 @@
+[
+  "*.txt",
+  "*.DS_Store",
+  "*.sass-cache",
+  "*.swp",
+  "*.tern-project",
+  "*.vscode",
+  "*.project",
+  "*.classpath",
+  "*.prefs"
+]
