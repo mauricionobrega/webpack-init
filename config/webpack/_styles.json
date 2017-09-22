@@ -1,8 +1,4 @@
 {
-  "home": [
-    "./src/sass/pages/home"
-  ],
-  "product": [
-    "./src/sass/pages/product"
-  ]
+  "home": "./src/sass/pages/home",
+  "product": "./src/sass/pages/product"
 }
