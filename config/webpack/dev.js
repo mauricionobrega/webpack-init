@@ -12,12 +12,10 @@ const path = require('path'),
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
 
-// console.log(utils.spreadMerge({javascripts: _javascripts}, {styles: _styles}, {static: _staticTextFiles}));
-
 module.exports = {
   context: root,
   devtool: 'source-map',
-  entry: utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}), // utils.merge(_javascripts, _styles),
+  entry: utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}),
   watch: false,
   resolve: {
     extensions: ['.scss', '.js']
@@ -40,7 +38,7 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg|webp)$/i,
         loaders: [
-          'file-loader?name=./svg/[name].min.[ext]', {
+          'file-loader?name=svg/[name].min.[ext]', {
             loader: 'image-webpack-loader',
             options: {
               gifsicle: {
@@ -101,7 +99,7 @@ module.exports = {
       {
         test: /\.(html|template)$/,
         loaders: [
-         'file-loader?name=[path]/[name].min.[ext]',
+         'file-loader?name=[path][name].[ext]',
          {
             loader: 'html-minify-loader',
             options: {

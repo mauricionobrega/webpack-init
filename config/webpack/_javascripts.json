@@ -1,9 +1,9 @@
 {
   "home": [
-    "./src/js/components/header.js",
-    "./src/js/home.js"
+    "./src/js/components/header",
+    "./src/js/home"
   ],
   "product": [
-    "./src/js/product.js"
+    "./src/js/product"
   ]
 }
