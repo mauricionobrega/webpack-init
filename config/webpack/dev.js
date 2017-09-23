@@ -10,13 +10,8 @@ const path = require('path'),
   _staticTextFiles = utils.listFiles('src', /\.(html|template|svg)$/),
   PWD = process.env.PWD,
   root = path.resolve(PWD),
-  dist = path.resolve(PWD, 'dist');
-
-let pages = {};
-require('fs').readdirSync(path.join(__dirname, 'pages')).forEach((file) => {
-  const page = require('./pages/' + file);
-  pages = utils.spreadMerge(pages, page);
-});
+  dist = path.resolve(PWD, 'dist'),
+  pages = utils.requireRecursive(path.join(__dirname, 'pages'));
 
 module.exports = {
   context: root,

@@ -1,7 +1,15 @@
 module.exports = (() => {
   'use strict';
 
-  const dir = require('node-dir');
+  const fs = require('fs'), dir = require('node-dir');
+
+  const requireRecursive = (folder) => {
+    let requires = {};
+    fs.readdirSync(folder).forEach((file) => {
+      requires = spreadMerge(requires, require(`${folder}/${file}`));
+    });
+    return requires;
+  }
 
   const spreadMerge = (...args) => {
     return Object.assign({}, ...args);
@@ -32,6 +40,7 @@ module.exports = (() => {
    * @public
    */
   return {
+    'requireRecursive': requireRecursive,
     'spreadMerge': spreadMerge,
     'listFiles': listFiles
   }
