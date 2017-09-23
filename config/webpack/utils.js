@@ -3,14 +3,6 @@ module.exports = (() => {
 
   const dir = require('node-dir');
 
-  const merge = (a, b) => {
-    const merged = {}
-    for (const i in a) {
-      merged[i] = a[i].concat(b[i] || []);
-    }
-    return merged;
-  };
-
   const spreadMerge = (...args) => {
     return Object.assign({}, ...args);
   }
@@ -40,7 +32,6 @@ module.exports = (() => {
    * @public
    */
   return {
-    'merge': merge,
     'spreadMerge': spreadMerge,
     'listFiles': listFiles
   }
