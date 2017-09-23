@@ -1,0 +1,8 @@
+{
+  "home": [
+    "./src/sass/pages/home",
+
+    "./src/js/components/header",
+    "./src/js/home"
+  ]
+}

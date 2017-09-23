@@ -12,10 +12,16 @@ const path = require('path'),
   root = path.resolve(PWD),
   dist = path.resolve(PWD, 'dist');
 
+let pages = {};
+require('fs').readdirSync(path.join(__dirname, 'pages')).forEach((file) => {
+  const page = require('./pages/' + file);
+  pages = utils.spreadMerge(pages, page);
+});
+
 module.exports = {
   context: root,
   devtool: 'source-map',
-  entry: utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}),
+  entry: utils.spreadMerge(pages, {static: _staticTextFiles}), //utils.spreadMerge(_javascripts, _styles, {static: _staticTextFiles}),
   watch: false,
   resolve: {
     extensions: ['.scss', '.js']

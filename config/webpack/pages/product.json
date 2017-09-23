@@ -1,0 +1,7 @@
+{
+  "product": [
+    "./src/sass/pages/product",
+
+    "./src/js/product"
+  ]
+}
