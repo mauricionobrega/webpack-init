@@ -1,4 +1,5 @@
-const path = require('path'),
+const distFolder = 'dist',
+  path = require('path'),
   utils = require('./utils'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
@@ -10,8 +11,11 @@ const path = require('path'),
   _staticTextFiles = utils.listFiles('src', /\.(html|template|svg)$/),
   PWD = process.env.PWD,
   root = path.resolve(PWD),
-  dist = path.resolve(PWD, 'dist'),
+  dist = path.resolve(PWD, distFolder),
   pages = utils.requireRecursive(path.join(__dirname, 'pages'));
+
+const SpritePlugin = require('svg-sprite-loader/plugin');
+
 
 module.exports = {
   context: root,
@@ -39,7 +43,7 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg|webp)$/i,
         loaders: [
-          'file-loader?name=svg/[name].min.[ext]', {
+          'file-loader?name=[path][name].min.[ext]', {
             loader: 'image-webpack-loader',
             options: {
               gifsicle: {
@@ -114,10 +118,32 @@ module.exports = {
          }
         ]
       },
+
+      // images from img/flags goes to flags-sprite.svg
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader?name=./mauricio/flags-sprite.min.[ext]',
+        include: path.resolve('./svg/img/flags'),
+        options: {
+          extract: true,
+          spriteFilename: 'flags-sprite.svg'
+        }
+      },
+
+      // images from img/icons goes to icons-sprite.svg
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader?name=./mauricio/icons-sprite.min.[ext]',
+        include: path.resolve('./svg/img/icons'),
+        options: {
+          extract: true,
+          spriteFilename: 'icons-sprite.svg'
+        }
+      }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin([distFolder], {
       root: root,
       exclude: ['**/*'],
       verbose: true,
@@ -132,6 +158,7 @@ module.exports = {
       ignore: _ignoreFiles,
       copyUnmodified: true,
       debug: true
-    })
+    }),
+    new SpritePlugin()
   ]
 };
